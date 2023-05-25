@@ -18,6 +18,8 @@ public class OrderRouter {
     public RouterFunction<ServerResponse> orderRoutes() {
         return RouterFunctions
                 .route(RequestPredicates.GET("/api/order/getAll"),
-                        orderHandler::getAll);
-    }
+                        orderHandler::getAll)
+                .andRoute(RequestPredicates.GET("/api/order/getOne"),
+                        orderHandler::getOne);
+    } // RouterFunctions에 여러 경로를 등록해서 라우팅할 수 있다.
 }

@@ -16,7 +16,7 @@ public class OrderHandler {
     public Mono<ServerResponse> getAll(ServerRequest serverRequest) {
         // ServerRequest, ServerResponse 는 Spring MVC에서 HttpRequest, HttpResponse와 대응되는 개념이다.
         return ServerResponse.ok()
-                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         Flux.just(
                                 new Order(1L, 100.0),
@@ -24,5 +24,13 @@ public class OrderHandler {
                                 new Order(3L, 300.0)),
                         Order.class
                 ); // 데이터를 body에 담아서 보내줄 때 데이터의 클래스를 같이 적어줘야 한다.
+    }
+
+    public Mono<ServerResponse> getOne(ServerRequest request) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(
+                        Mono.just(new Order(1L, 100.0)), Order.class
+                );
     }
 }
