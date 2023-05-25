@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -87,5 +88,12 @@ public class OrderController {
         }).collect(Collectors.toList());
 
         return list;
+    }
+
+    @GetMapping("/getOne")
+    public Mono<Order> getOne() {
+        Mono<Order> mono = Mono.just(new Order(1L, 100.00)).log();
+
+        return mono;
     }
 }
