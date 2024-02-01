@@ -1,6 +1,7 @@
 package com.ukeun.springbootwebflux.handler;
 
 import com.ukeun.springbootwebflux.pojo.Order;
+import java.time.Duration;
 import lombok.NoArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,11 @@ public class OrderHandler {
                         Flux.just(
                                 new Order(1L, 100.0),
                                 new Order(2L, 200.0),
-                                new Order(3L, 300.0)),
+                                new Order(2L, 300.0),
+                                new Order(2L, 400.0),
+                                new Order(2L, 500.0),
+                                new Order(2L, 200.0),
+                                new Order(3L, 300.0)).delayElements(Duration.ofSeconds(1)),
                         Order.class
                 ); // 데이터를 body에 담아서 보내줄 때 데이터의 클래스를 같이 적어줘야 한다.
     }
